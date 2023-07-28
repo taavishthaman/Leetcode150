@@ -28,3 +28,18 @@ ARRAYS AND STRINGS
 5. Majority Element
     Create a frequency map of all elements. As the array is being traversed keep track of max frequency 
     encountered so far and the element which has that frequency. Return that element.
+
+6. Rotate Array
+    First do a modulus of k with size of array and that will be new normalized k value. Now reverse the entire
+    array. Then reverse the first k elements. After that reverse the last n-k elements and that will be the
+    solution.
+
+7. Best Time to buy and sell stock
+    Create 2 pointers one initialized to the start of the array and denoting the minimum price at which we 
+    can buy a stock. Another pointer to traverse the prices array. If the current price is lesser than the
+    previous price at which stock was bought, shift the pointer to that index. And at every index check the
+    profit generated and if that profit is greater than max profit, update the value of max profit.
+
+8. Best Time to buy and sell stock II
+    Traverse the array and check 2 adjacent elements. If the difference of the next and previous is positive,
+    add that difference to the total profit and return the total profit.
