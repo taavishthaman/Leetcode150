@@ -1,0 +1,30 @@
+ARRAYS AND STRINGS
+
+1. Merge Sorted Array
+    Keep two pointers, one at the start of the first array and the other at the start of second array. Also
+    create a temperory vector. Now traverse both arrays comparing values at ith and jth index and pushing the
+    lesser of two to the temp array. After traversing both arrays copy the contents of the temp array to 
+    the first array.
+
+2. Remove Elements
+    Take an extra pointer and initialize it to start of the array. Now traverse the array and if an element
+    is encountered which is equal to the target value, skip that element otherwise copy the element to the
+    location of the pointer index and increment pointer by one. Return the pointer value at the en dwhich 
+    will denote the length of array.
+
+3. Remove Duplicates from sorted array
+    Keep two pointers one at the beginning of the array(call it k) and one to traverse it. Traverse till the second last
+    element and if current element is not equal to the next element, copy the current element to the k pointer index
+    and increment that pointer by one. After exiting the loop, copy the last element to the location of k pointer
+    and return (k+1) which is the new length of the array with no duplicates.
+
+4. Remove Duplicates from sorted array II
+    Similar to the above question, keep 2 pointers but also keep a counter variable initialized with 1. If
+    the current element is not equal to the next element check the value of count. If count is 1, copy just
+    one value of current element to the k index and increase value of k by 1. Otherwise if count is greater
+    than 1 copy the current element 2 times to the k and k+1 index and increase value of k by 2. Repeat the
+    same thing for the last element once out of the array.
+
+5. Majority Element
+    Create a frequency map of all elements. As the array is being traversed keep track of max frequency 
+    encountered so far and the element which has that frequency. Return that element.
