@@ -4,18 +4,23 @@ using namespace std;
 class Solution {
 public:
     int majorityElement(vector<int> & nums) {
-        unordered_map<int, int> m;
+        int res = 0;
+        int count = 0;
         int n = nums.size();
-        int max_frq = 0;
-        int res;
+
         for(int i=0; i<n; i++) {
-            m[nums[i]]++;
-            if(m[nums[i]] > max_frq) {
-                max_frq = m[nums[i]];
+            if(count == 0) {
                 res = nums[i];
+                count++;
+            } else {
+                if(nums[i] == res) {
+                    count++;
+                } else {
+                    count--;
+                }
             }
         }
-        
+
         return res;
     }
 };

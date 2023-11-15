@@ -6,17 +6,27 @@ ARRAYS AND STRINGS
     lesser of two to the temp array. After traversing both arrays copy the contents of the temp array to 
     the first array.
 
+    The better solution is to traverse from the end and compare the larger element first, then we do not need to
+    create an auxillary array.
+
+    Time Complexity: O(N + M)
+    Space Complexity: O(1) (Most Optimal)
+
 2. Remove Elements
     Take an extra pointer and initialize it to start of the array. Now traverse the array and if an element
     is encountered which is equal to the target value, skip that element otherwise copy the element to the
     location of the pointer index and increment pointer by one. Return the pointer value at the en dwhich 
     will denote the length of array.
 
+    Time Complexity: O(N)
+
 3. Remove Duplicates from sorted array
     Keep two pointers one at the beginning of the array(call it k) and one to traverse it. Traverse till the second last
     element and if current element is not equal to the next element, copy the current element to the k pointer index
     and increment that pointer by one. After exiting the loop, copy the last element to the location of k pointer
     and return (k+1) which is the new length of the array with no duplicates.
+
+    Time Complexity: O(N)
 
 4. Remove Duplicates from sorted array II
     Similar to the above question, keep 2 pointers but also keep a counter variable initialized with 1. If
@@ -25,14 +35,25 @@ ARRAYS AND STRINGS
     than 1 copy the current element 2 times to the k and k+1 index and increase value of k by 2. Repeat the
     same thing for the last element once out of the array.
 
+    Time Complexity: O(N)
+
 5. Majority Element
     Create a frequency map of all elements. As the array is being traversed keep track of max frequency 
     encountered so far and the element which has that frequency. Return that element.
+
+    The most optimal solution is to use boyer moore algorithm which works as follows. 
+    Take two variables count and res. Traverse the array and if count is 0 set the current element to the number
+    and increase the count by 1. Otherwise if the current element is equal to res increse count by 1 otherwise
+    decrease count by 1. In the end res should contain the majority element.
+
+    Time Complexity : O(n)
 
 6. Rotate Array
     First do a modulus of k with size of array and that will be new normalized k value. Now reverse the entire
     array. Then reverse the first k elements. After that reverse the last n-k elements and that will be the
     solution.
+
+    Time Complexity : O(n)
 
 7. Best Time to buy and sell stock
     Create 2 pointers one initialized to the start of the array and denoting the minimum price at which we 
@@ -40,6 +61,160 @@ ARRAYS AND STRINGS
     previous price at which stock was bought, shift the pointer to that index. And at every index check the
     profit generated and if that profit is greater than max profit, update the value of max profit.
 
+    Time Complexity: O(n)
+
 8. Best Time to buy and sell stock II
     Traverse the array and check 2 adjacent elements. If the difference of the next and previous is positive,
     add that difference to the total profit and return the total profit.
+
+9. Jump Game
+    Create a dp array of size n, set last index to true and start traversing from n-2 index. Here the objective is to 
+    reach the 0th element. For each element for all possible jumps check if current index + jump lands on an index 
+    which is not set to false. If it does, set it to true and break the current iteration. If all elements are false then
+    it will also be false. Do this till you reach 0th index and check if 0th index is true or not. If its true then its
+    possible otherwise not.
+
+    Time Complexity: O(n^n)
+    Space Complexity : O(n)
+
+10 Jump Game II
+    Now the objective is to not just reach the final index but calculate the minimum steps required to reach the final step.
+    For Top Down solution the base case would be if current index exceeds the array size then return INT_MAX otherwise if 
+    index lands on last index return 0. Now for every index first create an ans variable and initialise it with INT_MAX.
+    Now check all possible jumps from 1 to value on current index and calulate the subproblem. If the subproblem does not
+    retrurn INT_MAX, take min of ans and subproblem. After the loop ends check if ans is still INT_MAX and if it is, return
+    INT_MAX otherwise return 1 + ans.
+
+    For bottom up solution, create a dp array and set last index to 0, now the objective is to reach the 0th index. Start
+    traversing from n-2 index to 0 and run an inner loop of jump = 1 to max jump. If the index does not land on INT_MAX
+    and is smaller than size of array calculate the value where it lands, add one to it and take a minimum with current value.
+    Keep repating until 0th index is reached and return the value stored at 0.
+
+    Time Complexity: O(n^n)
+    Space Complexity: O(n)
+
+11 H Index
+
+    The objective is to find papers that have been cites atleast H times and return the value of H. To do this we can use
+    counting sort approach. Find the maximum value in the array and create a new array with size of maximum value. Now for
+    each citation, add 1 from index 0 to the value of citatiion inside the auxillary array. Now traverse the auxillary array
+    and for each index i check if array[i] is atleast i and if it is update the result to match i. The in the end return
+    the value of result.
+
+    Most optimal solution is to reverse sort the array and for every index check if i+1 is lesser than or equal to 
+    citations[i] and if it is update the result as max(result, i+1) and return the result. 
+
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+
+12 Product of array except self
+
+    Create a new array caaled prefix and calculate the prefix multiplication for each index. Now create a variable called op
+    and initialise it with 1. Now start traversing from n-1 index and till 1 index and for each index i multiply prefix[i-1]
+    with op and store it in preifx[i] and multiply op with nums[i]. After the loop ends replace preifx[0] with final value
+    of output and return the prefix array.
+
+    Time Complexity : O(n)
+    Space Complexity : O(n)
+
+
+13. Insert Delete GetRandom O(1)
+
+    Create a unordered map and a vector and while inserting check if the element exists or not, if it does return false otherwise
+    insert it to the end of array and add to the map. While removing check if element exists and if it does first swap it 
+    with the last index of array then update the map, then remove it from array and then remove it from the map. Order must
+    be like this otherwise some bad edge cases will occur.
+
+    So The order must be:
+        Swap in Array -> Update Map -> Delete from Array -> Delete from Map
+
+    For random function just use { rand() % arr.size() } to generate random index.
+
+    Time Complexity : O(1)
+    Space Complexity : O(n)
+
+14. Gas Station
+    First compute total gas and total cost and if total gas is lesser than total cost completing the circuit will not be possible
+    so return -1.
+
+    Now create two variables total and index both initialized with 0. Traverse the array and compute total += gas[i] - cost[i]
+    for each index i. Now if total becomes negative, reset total to 0 and index to i+1 as completing the circuit before that
+    index will not be possible. After the end of loop return the index value.
+
+    Time Complexity : O(n)
+    Space Complexity : O(1)
+
+15. Candy
+    Create a vector of size n and initialise all indices with 1. This denotes the initial amount of candies each child has.
+
+    Now do a left pass of the array starting from index 1 and if ratings[i] > ratings[i-1] then check if candies[i] > candies[i-1] + 1,
+    and if not then update candies[i] with candies[i-1] + 1, and similarly do it for the right pass starting from n-2 index and
+    check if ratings[i] > ratings[i+1] and also check if candies[i] > candies[i+1] + 1 and if not then candies[i] becomes candies[i+1] + 1.
+
+    In the end sum up all the values and that will be the result.
+
+    Time Complexity : O(n)
+    Space Complexity : O(n)
+
+16. Trapping Rainwater
+
+    Create two new arrays called left and right of size n initialized with 0. For the left array check if the height is greater
+    than one previous height and if it is then set the height as max of current height or height stored at left[i-1]. Similarly
+    for right vector check if the current height value is greater than right[i+1] and if it is update it. Now tarverse the
+    height array and the water trapped would be min(left[i], right[i]) - height[i]. Add up all the values and that will be the
+    total water trapped.
+
+    Time Complexity : O(n)
+    Space Complexity : O(n)
+
+17. Roman to Integer
+
+    Store all characters inside a hash table then traverse the string. Check if s[i+1] is larger than s[i] and if it is then
+    add to result s[i+1] - s[i] otherwise simply add value of s[i]. Also check if i+1 is lesser than n.
+
+    Time Complexity : O(n)
+    Space Complexity : O(1)
+
+18. Integer to Roman
+
+    Keep extracting the last element of the number and multiplying with the appropriate power. Check if number is half, lesser
+    than half or more than half of the nearest greater power of 10. Add symbols accordingly using nested conditionals and for
+    loops.
+
+    Time Complexity : O(n) where n is the number of digits
+    Space Complexity : O(1)
+
+19. Length of Last Word
+
+    Maintain a boolean variable to check if the last character is actually a space. Once all spaces at the end are depleted,
+    start counting characters and set the variable to false, now if another space is encountered break the loop.
+
+    Time Complexity : O(n)
+    Space Complexity : O(1)
+
+20. Longest Common Prefix
+
+    Extract the first string and maintain a count and for each character compare with with the count character inside the
+    rest of the strings, if there is a mismatch or count exceeds lenght of the string, break the loops and return the substring
+    till the count length.
+
+    Time Complexity : O(n * 2)
+    Space Complexity : O(1)
+
+21. Reverse words in string
+
+    First tokenize the string using stringstream and ignore any empty string token while tokenizing. Once we have the tokens 
+    reverse the array and join all the tokens with a space. Pop the last space and return the string.
+
+    Time Complexity : O(n)
+    Space Complexity : O(n)
+
+
+22. Index of first occurence
+
+    Simply use haystack.find(needle) in c++ which will return the index of the first occurence.
+
+
+    
+
+
