@@ -320,4 +320,55 @@ Binary Search
     Time Complexity : O(logn)
     Space Complexity : O(1)
 
+2. Search a 2D matrix
+
+    Initialize i at 0 and j at m-1 where n are rows and m are columns in matrix. Now do a staircase search i.e. if current
+    cell is equal to target return true, otherwise if target is smaller than current cell move left otherwise move down. If
+    out of matrix return false.
+
+    Time Complexity : O(n + m)
+    Space Complexity : O(1)
+
+3. Peak element
+
+    Run a standard binary search routine. First check whether the mid is > 0 and element at mid - 1 is greater than element
+    at mid. If it is, put e = mid - 1, now check if mid is smaller tha  n-1 and element at mid + 1 is greater than element 
+    at mid. If it is put s = mid + 1, if none of these are true simply return mid.
+
+    Time Complexity : O(logn)
+    Space Complexity : O(1)
+
+4. Search In Rotated Sorted Array
+
+    This will require some modification of standard binary search. Run the outer while loop and check if mid is equal to target.
+    If it is return mid index. Now check if nums[start] <= nums[mid] which means we are in the first array. Now check if target 
+    is smaller than nums[mid] and target is greater than nums[start]. If it is search in the left search space otheriwse search 
+    in the right search space. In the else condition, check if target <= nums[end] and target >= nums[mid]. If it is, search in
+    the right search space otherwise search in the left search space.
+
+    Time Complexity : O(logn)
+    Space Complexity : O(1)
+
+5. First and Last position of element in sorted Array
+
+    Find the lower bound of the element first, run a standard binary search routine and everytime the target is encountered
+    update the res value to the target index and then search in the left search space. Similarly find the upper bound by
+    searching in the right search space. Now return both the indices in an array.
+
+    Time Complexity : O(logn)
+    Space Complexity : O(1)
+
+6. Find Minimum in rotated sorted array
+
+    Run a standard binary search routine. Now check if the search space is already sorted i.e. nums[s] < nums[e], if it is
+    update res to minimum of nums[s] and res and break the loop. Otherwise caluclate the mid and update the res to minimum of
+    res and nums[mid]. Now check if mid lies on  the left portion of the rotated array or right portion. This can be checked as
+    follows if(nums[s] <= nums[m]) then left portion, so check in right portion i.e s = mid + 1 otherwise e = mid - 1. Return res
+    in the end.
+
+    Time Complexity : O(logn)
+    Space Complexity : O(1)
+
+
+
 
