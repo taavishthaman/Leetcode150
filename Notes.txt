@@ -359,9 +359,80 @@ Matrix
 
 Backtracking 
 
-    
+    1. Letter Combinations of Phone Number
+
+        First map the index to the corresponding string in the keypad using a vector. Write a recursive function which takes
+        in the input string, the vector and index initialized to 0 and also an empty string as arguments. Now extract each 
+        index from the string and get the corresponding string on the keypad. Now add every character of that string to the
+        formed string and find the combinations for the rest of the input by increasing index by one for subsequent recursive
+        calls. When index is equal to the input string size that is the base case and output the string there.
+
+        Time Complexity : O(3 ^ n) On Average
+        Space Complexity : O(n)
+
+    2. Combinations 
+
+        This is just the regular finding subsets problem with a constraint that subset size should be of length k. So in the base
+        case just add the subset whose size is k to the output vector.
+
+        Time Complexity : O(2 ^ n)
+        Space Complexity : O(n)
+
+    3. Permutations
+
+        Create a recursive function with the vector, and index initialized to 0 as argument. In the recursive case run a for
+        loop with iterator j from i to array size and swap i and j. Once swapped find the permutations for the rest of the array
+        by calling the function again with i+1. Then once the recursive call returns swap i and j again. In the base case if i
+        reaches the last index of the array, add the array to the output vector.
+
+        Time Complexity : O(n^2)
+        Space Complexity : O(n)
+
+    4. Combination Sum
+
+        This is slightly tricky question. The objective is to return all combinations which add up to a given target number.
+        An element can be included infinite number of times. So create a recursive function with the array, an index initialized
+        to 0 and the target element. Now there will be 2 cases, either the current element can be included in the combination
+        i.e. target - nums[i] >= 0 or it can't be. In the first case include it in the current combination and decrease the target
+        element by nums[i] and again find the combinations for the rest of the input without increasing i. After that remove the 
+        current element from the combination and find the rest of the combinations and this time increase index i by 1. In the second
+        case simply exclude the current character and find combinations for the rest of the input, increase index by 1 this time.
+
+        Time Complexity : O(2 ^ n)
+        Space Complexity : O(n)
+
+    5. N-Queens II
+
+        Count the total possible configurations of board. Simple n queens problem with ways varible initialized to 0 in every
+        recursive call. Check for each column per row, if queen can be placed, place it and find the rest of the possibilities
+        and add them all to ways. Then reset the position by placing 0 on the board. At the end of the loop return ways.
+
+        Time Complexity : O(n ^ n)
+        Space Complexity :O(n)
+
+    6. Generate Parentheses
+
+        Create a recursive function with n, open_count and close_count and a string which is empty in the beginning. In the
+        recursive case there will be two cases when open_count is smaller than n and close_count is smaller than open_count.
+        In the first case, add an opening bracket to the string and increase open_count by 1. In the second case add a closing
+        bracket to the string and increase close_count by 1. In the base case if open_count + close_count is equal to 2 * n 
+        print the output string and return.
+
+        Time Complexity : O(2 ^ n)
+        Space Complexity : O(n)
+
+    7. Word Search
+
+        Traverse the 2D array and find a character which matches the first character of the word. Once found run a DFS routine
+        with the visited array to find the rest of the word. If found simplyt return true, otherwise check  for the rest of the
+        array. If not found in any case return false.
+
+        Time Complexity : O(n*n*w) where w is the word length
+        Space Complexity : O(w)
 
 Divide and Conquer
+
+    1. Sorted array to BST
 
 
 
